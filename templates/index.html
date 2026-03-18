@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayTheGod</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 
@@ -14,7 +14,26 @@
     </header>
     
     <main class="game-container">
-        
+        <section id="combining-pad">
+            <h2>Combining Pad</h2>
+            <div class="slots">
+                <div id="slot-1" class="slot">Select Item 1</div>
+                <div id="slot-2" class="slot">Select Item 2</div>
+            </div>
+            <button id="combine-btn">Collide</button>
+            <p id="result-message"></p>
+        </section>
+
+        <search id="inventory">
+            <h2>Known Particles</h2>
+            <div class="inventory-grid" id="elements-list">
+                <div class="element" data-name="Quark">Quark</div>
+                <div class="element" data-name="Electron">Electron</div>
+                <div class="element" data-name="Photon">Photon</div>
+            </div>
+        </search>
     </main>
+
+    <script src="../static/js/script.js"></script>
 </body>
 </html>
