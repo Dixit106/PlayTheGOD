@@ -70,7 +70,9 @@ combineBtn.addEventListener('click', () => {
                 const newParticle = document.createElement('div');
                 newParticle.className = 'element';
                 newParticle.setAttribute('data-name', data.result);
-                newParticle.innerText = data.result;
+                
+                // add default icons for new things
+                newParticle.innerHTML= `<span class="icon">🌌</span>${data.result}`;
 
                 // Make it clickable and push it to the screen
                 makeParticleClickable(newParticle);
