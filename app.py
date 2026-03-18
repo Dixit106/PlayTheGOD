@@ -1,10 +1,11 @@
+print("starting the file....")
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 # My secret recipe book don't cheat :)
 # We combine the name with a "+" to check if they match
 RECIPES = {
-    "Quark+Quark": "Photon",
+    "Quark+Quark": "Proton",
     "Electron+Proton":"Hydrogen",
     "Hydrogen+Hydrogen":"Helium",
     "Electron+Photon":"Energy Beam"
@@ -31,5 +32,5 @@ def combine():
     else:
         return jsonify({"success": False, "result": "Nothing Happened..."})
     
-    if __name__ == '__main__':
-        app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)

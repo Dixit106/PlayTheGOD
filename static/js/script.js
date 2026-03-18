@@ -5,10 +5,10 @@ const slot1 = document.getElementById('slot-1');
 const slot2 = document.getElementById('slot-2');
 const combineBtn = document.getElementById('combine-btn');
 const resultMsg = document.getElementById('result-message');
-const particles = document.querySelectorAll('.element');
+const elementsList= document.getElementById('elements-list'); //to add new boxes
 
 // clicking particles to put them in slots
-particles.forEach(particle => {
+function makeParticleClickable(particle) {
     particle.addEventListener('click', () => {
         const name = particle.getAttribute('data-name');
 
@@ -20,6 +20,11 @@ particles.forEach(particle => {
             slot2.innerText = name;
         }
     });
+}
+
+// Click rule to starting particle
+document.querySelectorAll('.element').forEach(particle => {
+    makeParticleClickable(particle);
 });
 
 //clicking slots to empty them
@@ -36,7 +41,7 @@ slot2.addEventListener('click', () => {
 //clicking the collide button
 combineBtn.addEventListener('click', () => {
     if (item1 && item2) {
-        resultMsg.innerText = 'smashing ${item1} and ${item2} together...'
+        resultMsg.innerText = `smashing ${item1} and ${item2} together...`
         
     // will send in flask to see what it makes    
     fetch('/combine', {
@@ -49,8 +54,29 @@ combineBtn.addEventListener('click', () => {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            resultMsg.innerText = 'Success! You created: ${data.result}';
-            resultMsg.style.colour = "#66fc1"; // success
+            resultMsg.innerText = `Success! You created: ${data.result}`;
+            resultMsg.style.color = "#66fcf1"; // success
+
+            //check if particle already in list or not
+            let alreadyHaveIt = false;
+            document.querySelectorAll('.element').forEach(p => {
+                if (p.getAttribute('data-name') === data.result) {
+                    alreadyHaveIt = true;
+                }
+            });
+
+            // If we don't have it, create the HTML box!
+            if (!alreadyHaveIt) {
+                const newParticle = document.createElement('div');
+                newParticle.className = 'element';
+                newParticle.setAttribute('data-name', data.result);
+                newParticle.innerText = data.result;
+
+                // Make it clickable and push it to the screen
+                makeParticleClickable(newParticle);
+                elementsList.appendChild(newParticle);
+            }
+
         } else {
             resultMsg.innerText = data.result;
             resultMsg.style.color = "#c5c6c7" //failure
