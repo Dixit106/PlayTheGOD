@@ -153,3 +153,38 @@ header h1 {
     margin: 0;
     color: rgba(255, 255, 255, 0.8);
 }
+
+#music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+#music-player button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding: 0;
+}
+
+#music-player button:hover {
+    transform: scale(1.2);
+}
+
+#track-name {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    min-width: 60px;
+}

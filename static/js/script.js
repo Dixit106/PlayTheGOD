@@ -84,7 +84,7 @@ combineBtn.addEventListener('click', () => {
                 const goalBox = document.getElementById('goal-tracker');
                 goalBox.innerHTML = `<h3>🏆 YOU WIN! 🏆</h3><p>The Universe has been born.</p>`;
                 goalBox.style.background = "rgba(102, 252, 241, 0.2)";
-                goalBox.borderColor = "#66fcf1";
+                goalBox.style.borderColor = "#66fcf1";
             }
 
         } else {
@@ -129,3 +129,42 @@ hintBtn.addEventListener('click', () => {
     });
 });
 
+// music player logic
+const songs = [
+    '/static/music/song1.mp3',
+    '/static/music/song2.mp3',
+    '/static/music/song3.mp3',
+];
+
+let currentSongIndex = 0;
+const bgAudio = new Audio(songs[currentSongIndex]);
+const playBtn = document.getElementById('play-pause-btn');
+const nextBtn = document.getElementById('next-btn');
+const trackName = document.getElementById('track-name');
+let isPlaying = false;
+
+playBtn.addEventListener('click', () => {
+    if (isPlaying) {
+        bgAudio.pause();
+        playBtn.innerText = '▶️';
+    } else {
+        bgAudio.play();
+        playBtn.innerText = '⏸️';
+    } 
+    isPlaying = !isPlaying;
+});
+
+nextBtn.addEventListener('click', () => {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    bgAudio.src = songs[currentSongIndex]
+    trackName.innerText = `Track ${currentSongIndex + 1}`;
+
+    if (isPlaying) {
+        bgAudio.play();
+    }
+});
+
+//auto play
+bgAudio.addEventListener('ended', () => {
+    nextBtn.click();
+});
