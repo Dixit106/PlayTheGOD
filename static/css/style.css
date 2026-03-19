@@ -130,3 +130,26 @@ header h1 {
     box-shadow: 0 0 15px #66fcf1;
     border-color: #fff;
 }
+/*the goal tracker*/
+#goal-tracker {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 15px 30px;
+    margin: 0 auto 30px auto;
+    max-width: 500px;
+    box-shadow: 0 4px 15px rgba( 0, 0, 0, 0.3);
+    transition: 0.5s;
+}
+
+#goal-tracker h3 {
+    margin: 0 0 5px 0;
+    color: #a777e3;
+    text-shadow: 0 0 10px rgba(167, 199, 227, 0.5);
+}
+
+#goal-tracker p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+}

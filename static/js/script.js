@@ -91,6 +91,12 @@ combineBtn.addEventListener('click', () => {
             resultMsg.innerText = data.result;
             resultMsg.style.color = "#c5c6c7" //failure
         }
+
+        // to clean the combination area
+        item1 = null;
+        item2 = null;
+        slot1.innerText = "Select Item 1";
+        slot2.innerText = "Select Item 2";
     });
     
     } else {
