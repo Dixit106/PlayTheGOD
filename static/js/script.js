@@ -79,6 +79,14 @@ combineBtn.addEventListener('click', () => {
                 elementsList.appendChild(newParticle);
             }
 
+            //The win condition
+            if (data.result == "Universe") {
+                const goalBox = document.getElementById('goal-tracker');
+                goalBox.innerHTML = `<h3>🏆 YOU WIN! 🏆</h3><p>The Universe has been born.</p>`;
+                goalBox.style.background = "rgba(102, 252, 241, 0.2)";
+                goalBox.borderColor = "#66fcf1";
+            }
+
         } else {
             resultMsg.innerText = data.result;
             resultMsg.style.color = "#c5c6c7" //failure
@@ -89,3 +97,29 @@ combineBtn.addEventListener('click', () => {
         resultMsg.innerText = "pick two particles first!";
     }
 });
+
+// -- hint system logic
+const hintBtn = document.getElementById('hint-btn');
+const hintMsg = document.getElementById('hint-message');
+
+hintBtn.addEventListener('click', () => {
+    // gather list of things player has disvovered
+    let currentInventory = [];
+    document.querySelectorAll('.element').forEach(p => {
+        currentInventory.push(p.getAttribute('data-name'));
+    });
+
+    //ask flask for the next hint based on the list
+    fetch('/hint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({inventory: currentInventory }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        hintMsg.innerText = data.hint;
+    });
+});
+
